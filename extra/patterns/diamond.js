@@ -20,3 +20,5 @@ function formDiamond(rows) {
     }
 }
 formDiamond(10);
+
+
