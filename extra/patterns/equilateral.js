@@ -1,6 +1,6 @@
-var a = '';
-var n = 10;
-var m = (n-1); 
+let a = '';
+let n = 10;
+let m = (n-1); 
 for(i=1; i <= n; i++)
 {
     a = a.trim();
