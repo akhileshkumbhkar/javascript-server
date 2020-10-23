@@ -10,7 +10,7 @@ function formDiamond(rows) {
         else {
             i <= n ? k++ : k--;
         }
-        for (var j = 1; j <= rows; j++) {
+        for (let j = 1; j <= rows; j++) {
             if (j <= (n - 1 + k) && j >= (n + 1 - k))
                 s += "*";
             else
