@@ -56,5 +56,3 @@ function hasPermission(moduleName,role,permissionType)
 }
 
 console.log(hasPermission('getUsers','','delete'));
-
-

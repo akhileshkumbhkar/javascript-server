@@ -21,9 +21,3 @@ Project Manager. ...
 SVG Viewer. ...
 Git History. ...
 Live Share.
-
-
-
-
-
-

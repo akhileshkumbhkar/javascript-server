@@ -47,5 +47,3 @@ function ValidateUser(users)
 }
 
 ValidateUser(users)
-
-
