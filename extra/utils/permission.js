@@ -6,7 +6,6 @@ let permissions = {
         'delete': [],
     }
 }
-
 export default function hasPermission(moduleName, role, permissionType) {
 
     if (permissions[moduleName] !== undefined) {
@@ -49,5 +48,3 @@ export default function hasPermission(moduleName, role, permissionType) {
         return false;
     }
 }
-
-

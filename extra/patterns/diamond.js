@@ -19,4 +19,4 @@ export default function diamond(rows) {
         console.log(s);
     }
 }
-//formDiamond(10);
+

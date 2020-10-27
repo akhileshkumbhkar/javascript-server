@@ -35,5 +35,5 @@ export default function hasPermission ( moduleName , role: string,  permissionTy
     else {
         console.log('Module Name is not found') ;
         return false;
-    }
+     }
 }

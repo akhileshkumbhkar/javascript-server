@@ -2,44 +2,38 @@
     "defaultSeverity": "error",
     "extends": [
     "tslint:recommended"
-     ],
-
-     "jsRules": {},
-
-    "rules": {
-    "class-name": true,
-
-    "comment-format": [
-    true,
-     "check-space"
-     ],
-
-    "indent": [
-    true,
-     "spaces",
-     2
-    ],
-
-    "one-line": [
-    true,
-    "check-open-brace",
-    "check-whitespace"
-     ],
-
-    "no-var-keyword": true,
+ ],
+"jsRules": {},
+"rules": {
+"class-name": true,
+"comment-format":
+ [
+true,
+ "check-space"
+ ],
+ "indent": 
+ [
+true,
+ "spaces",
+ 2
+ ],
+"one-line": [
+true,
+ "check-open-brace",
+ "check-whitespace"
+],
+ "no-var-keyword": true,
     "quotemark": [
      true,
      "single",
     "avoid-escape"
       ],
-
-     "semicolon": [
+"semicolon": [
      true,
      "always",
      "ignore-bound-class-methods"
      ],
-
-     "whitespace": [
+ "whitespace": [
      true,
      "check-branch",
      "check-decl",
@@ -48,8 +42,7 @@
     "check-separator",
      "check-type"
       ],
-
-      "typedef-whitespace": [
+ "typedef-whitespace": [
      true, 
     {
      "call-signature": "nospace",
@@ -58,8 +51,7 @@
      "property-declaration": "nospace",
      "variable-declaration": "nospace"
     },
-
-     {
+ {
      "call-signature": "onespace",
      "index-signature": "onespace",
     "parameter": "onespace",
@@ -67,8 +59,7 @@
     "variable-declaration": "onespace"
      }
      ], 
-
-    "no-internal-module": true,
+ "no-internal-module": true,
      "no-trailing-whitespace": true,
      "no-null-keyword": true,
      "prefer-const": true,
@@ -79,4 +70,3 @@
      },
      "rulesDirectory": []
     }
-    

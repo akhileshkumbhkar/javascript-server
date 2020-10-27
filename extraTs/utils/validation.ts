@@ -1,4 +1,3 @@
-import { stringifyConfiguration } from 'tslint/lib/configuration';
 import ValidateEmail from './helper' ;
 const valid = [] ;
 const invalid = [] ;
