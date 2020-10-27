@@ -1,4 +1,4 @@
-function formDiamond(rows) {
+export default function diamond(rows) {
     let k = 0;
     for (let i = 1; i <= rows; i++) {
         let s = "";
@@ -19,6 +19,4 @@ function formDiamond(rows) {
         console.log(s);
     }
 }
-formDiamond(10);
-
-
+//formDiamond(10);
