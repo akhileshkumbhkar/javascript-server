@@ -2,6 +2,7 @@ interface IUsers {
 traineeEmail: string;
 reviewerEmail: string;
 }
+
 type access = {
     all: string[];
     read: string[];
@@ -9,6 +10,7 @@ type access = {
     delete: string[];
 
 };
+
 interface IPermissions {
 getUsers: access;
 }

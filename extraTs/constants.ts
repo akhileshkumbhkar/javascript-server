@@ -24,7 +24,6 @@
         reviewerEmail: 'reviewer4@successive.tech',
     }
 ];
-
 export{
     users , permissions
 };

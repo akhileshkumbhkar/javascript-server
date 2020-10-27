@@ -3,3 +3,4 @@ import hasPermission from './permission' ;
   export {
     hasPermission , ValidateUser
   } ;
+  

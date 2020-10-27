@@ -1,16 +1,11 @@
 import { permissions } from '../constants' ;
-
 export default function hasPermission ( moduleName , role: string,  permissionType): boolean {
-
-    if (permissions[moduleName] !== undefined) {
+ if (permissions[moduleName] !== undefined) {
         console.log( 'Module Name found' ) ;
         if (permissions[moduleName][permissionType] !== undefined) {
             console.log( 'Permission Type found' );
             if (permissions[moduleName][permissionType] !== 'all') {
-                // if (permissions[moduleName][ 'all' ].indexOf(role) !== -1) {
-                //     console.log('Role found') ;
-                // }
-                    return true ;
+         return true ;
             }
             if (permissions[moduleName][permissionType].length > 0) {
             if (permissions[moduleName][permissionType].indexOf ( role ) ! === -1) {
@@ -42,5 +37,3 @@ export default function hasPermission ( moduleName , role: string,  permissionTy
         return false;
     }
 }
-
-
