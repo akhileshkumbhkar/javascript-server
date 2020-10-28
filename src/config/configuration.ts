@@ -4,5 +4,3 @@ const config = envVars.parsed ;
 export default config;
 console.log ('config is' , config) ;
 Object.freeze(config) ;
-
-
