@@ -7,6 +7,7 @@ class UserController {
         UserController.instance = new UserController();
         return UserController.instance;
     }
+
     get(req, res, next) {
         try {
             console.log('Inside get() method of User Controller');
@@ -23,6 +24,7 @@ class UserController {
             console.log('Inside error', err);
         }
     }
+
     create(req, res, next) {
         try {
             console.log('Inside post() method of User Controller');
@@ -37,6 +39,7 @@ class UserController {
             console.log('Inside error', err);
         }
     }
+
     update(req, res, next) {
         try {
             console.log('Inside put() method of User Controller');
@@ -51,7 +54,8 @@ class UserController {
             console.log('Inside error', err);
         }
     }
-    Delete(req, res, next) {
+
+    delete(req, res, next) {
         try {
             console.log('Inside delete() method of User Controller');
             res.send({
@@ -66,4 +70,5 @@ class UserController {
         }
     }
 }
+
 export default UserController.getInstance();

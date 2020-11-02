@@ -7,6 +7,7 @@ class TraineeController {
         TraineeController.instance = new TraineeController();
         return TraineeController.instance;
     }
+
     get(req, res, next) {
         try {
             console.log('Inside get() method of Trainee Controller');
@@ -23,6 +24,7 @@ class TraineeController {
             console.log('Inside error', err);
         }
     }
+
     create(req, res, next) {
         try {
             console.log('Inside post() method of Trainee Controller');
@@ -37,6 +39,7 @@ class TraineeController {
             console.log('Inside error', err);
         }
     }
+
     update(req, res, next) {
         try {
             console.log('Inside put() method of Trainee Controller');
@@ -51,7 +54,8 @@ class TraineeController {
             console.log('Inside error', err);
         }
     }
-    Delete(req, res, next) {
+
+    delete(req, res, next) {
         try {
             console.log('Inside delete() method of Trainee Controller');
             res.send({
@@ -66,4 +70,5 @@ class TraineeController {
         }
     }
 }
+
 export default TraineeController.getInstance();

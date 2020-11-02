@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express' ;
 export default (err, req: Request , res: Response , next: NextFunction) => {
+    
 console.log(`Error is ${err.err}`) ;
 res.send({
         'error': err.err,
