@@ -34,14 +34,15 @@ const config = {
                  }
             },
 
-    Delete: {
+    delete: {
          id: {
              required: true,
              errorMessage: 'Id is required',
              in: ['params']
              }
             },
-             update: {
+            
+            update: {
                 id: {
                     required: true,
                     string: true,
