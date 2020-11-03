@@ -7,9 +7,8 @@ const traineeRoutes = express.Router();
 
 traineeRoutes.route('/')
         .get( validationHandler( config.get ) , TraineeController.get )
-        .post( validationHandler( config.create ) , TraineeController.post )
-        .put( validationHandler( config.update ) , TraineeController.put )
+        .post( validationHandler( config.create ) , TraineeController.create )
+        .put( validationHandler( config.update ) , TraineeController.update)
         .delete( validationHandler( config.delete ) , TraineeController.delete );
 
 export default traineeRoutes;
-
