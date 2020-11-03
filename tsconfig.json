@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "paths": {
     "*": [
-    "nodemodules/*",
+    "node_modules/*",
     "src/types/*"
     ]
     },
@@ -25,4 +25,3 @@
     ],
     "types": ["src/types"]
     }
-    
