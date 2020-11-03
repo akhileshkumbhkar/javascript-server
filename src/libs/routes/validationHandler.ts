@@ -65,7 +65,7 @@ export default ( config ) => ( req: Request, res: Response, next: NextFunction  
                 inValid.push ( {
                     index: {index},
                     location: check.in,
-                    message: check.errorMessage || `${index}  must be an default` ,
+                    message: check.errorMessage || `${index}   an default` ,
                 });
             }
         }

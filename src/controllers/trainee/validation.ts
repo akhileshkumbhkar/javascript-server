@@ -41,7 +41,7 @@ const config = {
              in: ['params']
              }
             },
-            
+
             update: {
                 id: {
                     required: true,
