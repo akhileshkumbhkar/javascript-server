@@ -12,3 +12,4 @@ traineeRoutes.route('/')
         .delete( validationHandler( config.delete ) , TraineeController.delete );
 
 export default traineeRoutes;
+
