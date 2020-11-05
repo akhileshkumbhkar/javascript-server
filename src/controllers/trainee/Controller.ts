@@ -27,7 +27,7 @@ get( req: Request, res: Response , next: NextFunction ) {
     }
 }
 
-create( req: Request, res: Response , next: NextFunction ) {
+post( req: Request, res: Response , next: NextFunction ) {
     try {
         console.log(`Inside Post/Create route of Trainee Controller `);
         res.status( 200 ).json( {
@@ -43,7 +43,7 @@ create( req: Request, res: Response , next: NextFunction ) {
     }
 }
 
-update( req: Request, res: Response , next: NextFunction ) {
+put( req: Request, res: Response , next: NextFunction ) {
     try {
         console.log(`Insode put route of Trainee Controller `);
         res.status(200).json({
