@@ -8,7 +8,7 @@ class Server {
     app;
     constructor(private config) {
         this.app = express();
- }
+  }
 
    public initBodyParser() {
         this.app.use(bodyparser.json());
@@ -43,8 +43,7 @@ class Server {
                     console.log( `App is running on port ${ PORT }` );
             });
         })
-        .catch(err => console.log(err));
-
+         .catch(err => console.log(err));
     }
 }
 
