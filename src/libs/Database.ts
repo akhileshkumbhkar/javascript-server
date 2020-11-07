@@ -1,30 +1,26 @@
 import * as mongoose from 'mongoose';
+import seedData from './seedData';
 
-export default class Database {
+class Database {
     static open(MONGO_URL) {
-     return new Promise((resolve, reject) => {
-            mongoose.set('useUnifiedTopology', true );
-            mongoose.set('useNewUrlParser', true);
-            mongoose.set('useCreateIndex', true);
-            mongoose.connect(MONGO_URL, (err) => {
+        return new Promise((resolve, reject) => {
+            console.log('mongoDB Url is:', MONGO_URL);
+            console.log('Inside open method');
+            mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
                 if (err) {
                     console.log(err);
                     reject(err);
                     return;
                 }
-                console.log('Database Connected');
+                seedData();
                 resolve(undefined);
             });
         });
     }
 
     static disconnect() {
-        mongoose.disconnect(err => {
-            if (err) {
-                console.log(err);
-            }
-            console.log('Database Disconnected');
-        });
+        console.log('Inside disconnect');
     }
 }
 
+export default Database;

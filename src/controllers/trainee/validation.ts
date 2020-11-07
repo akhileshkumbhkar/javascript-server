@@ -21,8 +21,8 @@ const config = {
             required: true,
             string: true,
             in: ['body'],
-            custom: ( Value ) => {
-                console.log( `Value ${ Value }` );
+            custom: (Value) => {
+                console.log(`Value ${Value}`);
                 throw { error: 'Error Occured', message: 'Message' };
             }
         },
