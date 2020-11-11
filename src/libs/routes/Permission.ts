@@ -1,4 +1,4 @@
-export default function hasPermission2( moduleName , role , permissionType ) {
+export default function hasPermissions( moduleName , role , permissionType ) {
     let type ;
     console.log( 'Module Name is', moduleName );
     console.log( 'permission type is', permissionType );

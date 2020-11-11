@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import hasPermission2 from './Permission';
+import hasPermissions from './Permission';
 import IRequest from '../../IRequest';
 import { Response, NextFunction } from 'express';
 
@@ -12,7 +12,7 @@ export default (module: any, permissionType: string) => (req: IRequest, res: Res
         console.log('user', User.result);
         req.userData = User.result;
         console.log(User.result.role);
-        const result = hasPermission2(module, User.result.role, permissionType);
+        const result = hasPermissions(module, User.result.role, permissionType);
         console.log('Result is', result);
         if (result === true)
             next();

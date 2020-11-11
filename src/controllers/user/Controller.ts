@@ -5,7 +5,6 @@ import IRequest from '../../IRequest';
 
 class UserController {
     static instance: UserController;
-
     static getInstance() {
         if (UserController.instance) {
             return UserController.instance;
@@ -21,7 +20,6 @@ class UserController {
                 message: 'User fetched succefully',
                 data: [{
                     name: 'user1',
-
                 },
                 {
                     name: 'user2',
@@ -38,14 +36,14 @@ class UserController {
             res.send({
                 message: 'User created succefully',
                 data: [{
-                    name: 'user1',
-
+                    name: 'user1'
                 },
                 {
                     name: 'user2',
                 }]
             });
-        } catch (err) {
+        }
+        catch (err) {
             console.log('Inside err', err);
         }
     }
@@ -56,8 +54,7 @@ class UserController {
             res.send({
                 message: 'Trainee updated succefully',
                 data: [{
-                    name: 'user1',
-
+                    name: 'user1'
                 },
                 {
                     name: 'user2',
@@ -75,13 +72,13 @@ class UserController {
                 message: 'Trainee deleted succefully',
                 data: [{
                     name: 'user1',
-
                 },
                 {
                     name: 'user2',
                 }]
             });
-        } catch (err) {
+        }
+        catch (err) {
             console.log('Inside err', err);
         }
     }
@@ -89,7 +86,6 @@ class UserController {
     login(req: IRequest, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
-
             userModel.findOne({ email: req.body.email }, (err, result) => {
                 if (result) {
                     if (password === result.password) {
