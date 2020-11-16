@@ -1,131 +1,115 @@
-import { Request, Response, NextFunction } from 'express';
-import { userModel } from '../../repositories/user/UserModel';
 import * as jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import UserRepository from '../../repositories/user/UserRepository';
+import { config } from '../../config';
 import IRequest from '../../IRequest';
 
 class UserController {
-    static instance: UserController;
-    static getInstance() {
-        if (UserController.instance) {
-            return UserController.instance;
-        }
-        UserController.instance = new UserController();
-        return UserController.instance;
-    }
 
-    get(req: Request, res: Response, next: NextFunction) {
-        try {
-            console.log('Inside get method of User');
-            res.send({
-                message: 'User fetched succefully',
-                data: [{
-                    name: 'user1',
-                },
-                {
-                    name: 'user2',
-                }]
+    public async me(req: IRequest, res: Response, next: NextFunction) {
+        const id = req.query;
+        const user = new UserRepository();
+        await user.getUser({ id })
+            .then((data) => {
+                res.status(200).send({
+                    message: 'User Fetched successfully',
+                    'data': { data },
+                    code: 200
+                });
             });
-        } catch (err) {
-            console.log('Inside err', err);
-        }
     }
 
-    create(req: Request, res: Response, next: NextFunction) {
-        try {
-            console.log('Inside post method of User');
-            res.send({
-                message: 'User created succefully',
-                data: [{
-                    name: 'user1'
-                },
-                {
-                    name: 'user2',
-                }]
+    public async create(req: IRequest, res: Response, next: NextFunction) {
+        const { id, email, name, role, password } = req.body;
+        const creator = req.userData._id;
+
+        const user = new UserRepository();
+        await user.createUser({ email, name, role, password }, creator)
+            .then(() => {
+                console.log(req.body);
+                res.send({
+                    message: 'User Created Successfully!',
+                    data: {
+                        'name': name,
+                        'email': email,
+                        'role': role,
+                        'password': password
+                    },
+                    code: 200
+                });
             });
-        }
-        catch (err) {
-            console.log('Inside err', err);
-        }
     }
 
-    update(req: Request, res: Response, next: NextFunction) {
-        try {
-            console.log('Inside put method of user');
-            res.send({
-                message: 'Trainee updated succefully',
-                data: [{
-                    name: 'user1'
-                },
-                {
-                    name: 'user2',
-                }]
+    public async update(req: IRequest, res: Response, next: NextFunction) {
+        const { id, dataToUpdate } = req.body;
+        console.log('id', id)
+        console.log('dataToUpdate', dataToUpdate)
+        const updator = req.userData._id;
+        const user = new UserRepository();
+        await user.updateUser(id, dataToUpdate, updator)
+            .then((result) => {
+                res.send({
+                    data: result,
+                    message: 'User Updated',
+                    code: 200
+                });
+            })
+            .catch((err) => {
+                res.send({
+                    error: 'User Not Found for update',
+                    code: 404
+                });
             });
-        } catch (err) {
-            console.log('Inside err', err);
-        }
     }
 
-    delete(req: Request, res: Response, next: NextFunction) {
-        try {
-            console.log('Inside delete method of user');
-            res.send({
-                message: 'Trainee deleted succefully',
-                data: [{
-                    name: 'user1',
-                },
-                {
-                    name: 'user2',
-                }]
+    public async remove(req: IRequest, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const remover = req.userData._id;
+        const user = new UserRepository();
+        await user.deleteData(id, remover)
+            .then((result) => {
+                res.send({
+                    message: 'Deleted successfully',
+                    code: 200
+                });
+            })
+            .catch((err) => {
+                res.send({
+                    message: 'User not found to be deleted',
+                    code: 404
+                });
             });
-        }
-        catch (err) {
-            console.log('Inside err', err);
-        }
     }
 
-    login(req: IRequest, res: Response, next: NextFunction) {
-        try {
-            const { email, password } = req.body;
-            userModel.findOne({ email: req.body.email }, (err, result) => {
-                if (result) {
-                    if (password === result.password) {
-                        console.log('result is', result.password);
-                        const token = jwt.sign({
-                            result
-                        }, 'qwertyuiopasdfghjklzxcvbnm123456');
-                        console.log(token);
-                        res.send({
-                            data: token,
-                            message: 'Login Permited',
-                            status: 200
-                        });
-                    }
-                    else {
-                        res.send({
-                            message: 'Password Doesnt Match',
-                            status: 400
-                        });
-                    }
-                }
-                else {
-                    res.send({
-                        message: 'Email is not Registered',
-                        status: 404
+    public async login(req: IRequest, res: Response, next: NextFunction) {
+        const { email } = req.body;
+        const user = new UserRepository();
+        await user.getUser({ email })
+            .then((userData) => {
+                if (userData === null) {
+                    res.status(404).send({
+                        err: 'User Not Found',
+                        code: 404
                     });
+                    return;
                 }
+                const { password } = userData;
+                if (password !== req.body.password) {
+                    res.status(401).send({
+                        err: 'Invalid Password',
+                        code: 401
+                    });
+                    return;
+                }
+                const token = jwt.sign(userData.toJSON(), config.KEY);
+                res.send({
+                    message: 'Login Successfull',
+                    status: 200,
+                    'token': token
+                });
+                return;
             });
-        }
-        catch (err) {
-            res.send(err);
-        }
-    }
-
-    me(req: IRequest, res: Response, next: NextFunction) {
-        const data = req.userData;
-        res.json({
-            data
-        });
     }
 }
 
-export default UserController.getInstance();
+export default new UserController();
