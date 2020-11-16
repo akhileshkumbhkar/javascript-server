@@ -9,5 +9,7 @@ export const userSchema = new UserSchema({
 export const userModel: mongoose.Model<IUserModel> = mongoose.model<IUserModel>
     (
         'User',
-        userSchema
+        userSchema,
+        'User',
+        true,
     );

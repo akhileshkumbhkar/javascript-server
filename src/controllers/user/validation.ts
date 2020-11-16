@@ -58,12 +58,12 @@ const config = {
         email: {
             required: true,
             string: true,
-            in: ['body ']
+            in: ['body']
         },
         password: {
             required: true,
             string: true,
-            in: ['body ']
+            in: ['body']
         }
     }
 };
