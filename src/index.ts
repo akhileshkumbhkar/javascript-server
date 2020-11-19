@@ -1,4 +1,4 @@
-import Server from './server';
+import Server from './Server';
 import { config } from './config';
 
 console.log('Config is', config);

@@ -1,8 +1,12 @@
-import * as dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-const enVars = dotenv.config();
-console.log('Inside config', enVars);
-const config: any = enVars.parsed;
-Object.freeze(config);
+config();
+const configuration: IConfig = {
+    PORT: process.env.PORT,
+    NODE_ENV: process.env.NODE_ENV,
+    MONGO_URL: process.env.MONGO_URL,
+    KEY: process.env.KEY,
+    Password: process.env.Password
+};
 
-export default config;
+export default Object.freeze(configuration);
