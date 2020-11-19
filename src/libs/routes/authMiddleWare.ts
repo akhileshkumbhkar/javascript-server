@@ -9,10 +9,10 @@ export default (module: any, permissionType: string) => (req: IRequest, res: Res
         const token = req.headers.authorization;
         console.log(token);
         const User = jwt.verify(token, 'qwertyuiopasdfghjklzxcvbnm123456');
-        console.log('user', User.result);
-        req.userData = User.result;
-        console.log(User.result.role);
-        const result = hasPermissions(module, User.result.role, permissionType);
+        console.log('user', User);
+        req.userData = User;
+        console.log(User.role);
+        const result = hasPermissions(module, User.role, permissionType);
         console.log('Result is', result);
         if (result === true)
             next();
