@@ -40,6 +40,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.12",
     "nodemon": "^2.0.6",
+    "query-string": "^6.13.7",
     "source-map-loader": "^1.1.1",
     "tsc-watch": "^4.2.9",
     "tslint": "^6.1.3",
