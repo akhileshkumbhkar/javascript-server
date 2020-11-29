@@ -49,6 +49,17 @@ export default (config) => (req: Request, res: Response, next: NextFunction) => 
             }
         }
 
+        if (check.boolean) {
+            values[0] = Boolean(values[0]);
+            if (!(typeof (values[0]) === 'boolean')) {
+                inValid.push({
+                    index: { index },
+                    location: check.in,
+                    message: check.errorMessage || `${index} should be boolean`,
+                });
+            }
+        }
+
         if (check.regex) {
             const regex = check.regex;
             if (!regex.test(values[0])) {

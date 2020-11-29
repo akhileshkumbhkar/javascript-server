@@ -22,7 +22,7 @@ class UserController {
         await user.getUser({ id })
             .then((data) => {
                 if (data === null) {
-                    throw '';
+                    throw new Error ('');
                 }
                 res.status(200).send({
                     message: 'User Fetched successfully',
@@ -155,7 +155,7 @@ class UserController {
         const userData = await user.getUser({ email });
         if (userData) {
             const { password } = userData;
-            bcrypt.compare(req.body.password, password, function (err, result) {
+            bcrypt.compare(req.body.password, password, function fun(err, result) {
                 if (err) { throw (err); }
                 if (result) {
                     const token = jwt.sign(userData.toJSON(), configuration.KEY, {
