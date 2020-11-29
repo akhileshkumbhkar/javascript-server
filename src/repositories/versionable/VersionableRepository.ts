@@ -18,26 +18,14 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return await this.model.findOne(query).lean();
     }
 
-    public async getallTrainee(skipDefined: number, limitDefined: number, sort: boolean) {
-        if (sort) {
-            const fetchData = await this.model.find({ deletedAt: null })
-                .skip(skipDefined)
-                .limit(limitDefined)
-                .sort({ name: 1, email: 1 });
-            const count = await this.model.find({ deletedAt: null })
-                .countDocuments();
-            const arr = [fetchData, count];
-            return arr;
-        } else {
-            const fetchData = await this.model.find({ deletedAt: null })
-                .skip(skipDefined)
-                .limit(limitDefined)
-                .sort({ createdAt: -1 });
-            const count = await this.model.find({ deletedAt: null })
-                .countDocuments();
-            const arr = [fetchData, count];
-            return arr;
-        }
+    public async getallTrainee(query: any, options: any, sortQuery: any) {
+        const fetchedData = await this.model.find(query, {}, options)
+            .sort(sortQuery);
+        const length = await this.model.find(query)
+            .sort(sortQuery)
+            .countDocuments();
+        const record = { count: length, records: fetchedData };
+        return record;
     }
 
     public async create(data: any, creator): Promise<D> {
@@ -57,10 +45,10 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
 
     public async update(id: string, dataToUpdate: any, updator) {
         let originalData;
-        await this.findOne({ _id: id, updatedAt: null, deletedAt: null })
+        await this.findOne({ _id: id, updatedAt: undefined, deletedAt: undefined })
             .then((data) => {
                 if (data === null) {
-                    throw '';
+                    throw new Error ('');
                 }
                 originalData = data;
                 const newId = VersionableRepository.generateObjectId();
@@ -78,7 +66,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
                 this.model.updateOne({ _id: oldId }, oldModel)
                     .then((res) => {
                         if (res === null) {
-                            throw '';
+                            throw new Error ('');
                         }
                         else
                             return res;
@@ -89,10 +77,10 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
 
     public async delete(id: string, remover: string) {
         let originalData;
-        await this.findOne({ _id: id, deletedAt: null })
+        await this.findOne({ _id: id, deletedAt: undefined })
             .then((data) => {
                 if (data === null) {
-                    throw '';
+                    throw new Error ('');
                 }
                 originalData = data;
                 const oldId = originalData._id;
@@ -104,7 +92,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
                 this.model.updateOne({ _id: oldId }, modelDelete)
                     .then((res) => {
                         if (res === null) {
-                            throw '';
+                            throw new Error ('');
                         }
                     });
             });
