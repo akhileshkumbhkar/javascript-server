@@ -1,11 +1,11 @@
-var a = '';
-var n = 10;
-var m = (n-1); 
-for(i=1; i <= n; i++)
+export default function equilateral(n){
+let a = '';
+let m = (n-1); 
+for(let i=1; i <= n; i++)
 {
     a = a.trim();
     a = ' '.repeat(m) + a + (i > 1 ? ' ' : '') + '*';
     console.log(a);
     m--;
 }
-
+}
