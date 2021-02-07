@@ -1,28 +1,36 @@
 import UserRepository from '../repositories/user/UserRepository';
-import *as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import configuration from '../config/configuration';
 
 const userRepository: UserRepository = new UserRepository();
-export default async () => {
-    userRepository.count()
+export default () => {
+    userRepository.countData()
         .then(res => {
             if (res === 0) {
-                const saltRounds = 10;
-                const password = configuration.Password;
-                const salt = bcrypt.genSaltSync(saltRounds);
-                const hash = bcrypt.hashSync(password, salt);
                 console.log('Data seeding in progress');
                 userRepository.createUser({
-                    name: 'head-trainer',
-                    email: 'headtrainer@successivetech',
+                    name: 'Head-trainer',
+                    email: 'headtrainer@successive.tech',
                     role: 'head-trainer',
-                    password: hash
+                    password: configuration.Password,
                 }, undefined);
                 userRepository.createUser({
                     name: 'trainer',
-                    email: 'trainer@successivetech',
-                    role: 'trainer',
-                    password: hash
+                    email: 'trainer@successive.tech',
+                    role: 'trainee',
+                    password: configuration.Password,
+                }, undefined);
+                userRepository.createUser({
+                    name: 'akhilesh',
+                    email: 'akhilesh@successive.tech',
+                    role: 'trainee',
+                    password: configuration.Password,
+                }, undefined);
+                userRepository.createUser({
+                    name: 'akhilesh kumar',
+                    email: 'akhileshkumar@successive.tech',
+                    role: 'trainee',
+                    password: configuration.Password,
                 }, undefined);
             }
         })

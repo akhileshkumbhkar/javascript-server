@@ -6,7 +6,7 @@ const configuration: IConfig = {
     NODE_ENV: process.env.NODE_ENV,
     MONGO_URL: process.env.MONGO_URL,
     KEY: process.env.KEY,
-    Password: process.env.Password
+    Password: process.env.password
 };
 
 export default Object.freeze(configuration);

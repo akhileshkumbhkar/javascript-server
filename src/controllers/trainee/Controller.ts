@@ -13,37 +13,30 @@ class TraineeController {
     }
 
     public async getAll(req: IRequest, res: Response, next: NextFunction) {
+        console.log('Inside getAll');
         let skip: number;
         let limit: number;
         let sort: boolean;
         let search: string = '';
         if ('limit' in req.query) {
             limit = Number(req.query.limit);
-        }
-        else {
+        } else {
             limit = 10;
         }
         if ('skip' in req.query) {
             skip = Number(req.query.skip);
-        }
-        else {
+        } else {
             skip = 0;
         }
-        if ('sort' in req.query) {
-            if (req.query.sort === 'true') {
-                sort = true;
-            }
-            else {
-                sort = false;
-            }
-        }
-        else {
+        if ('sort' in req.query && req.query.sort==='true') {
+            sort = true;
+        } else {
             sort = false;
         }
-
         if ('search' in req.query) {
-            search = req.query.search;
+            search = String(req.query.search);
         }
+        
         const query: any = {
             deletedAt: { $exists: false },
             updatedAt: { $exists: false },
@@ -64,8 +57,8 @@ class TraineeController {
             ]
         };
         const options: any = {
-            skip: {skip},
-            limit: {limit}
+            skip:  skip ,
+            limit: limit 
         };
         let sortQuery: any;
         if (sort) {
@@ -73,28 +66,31 @@ class TraineeController {
                 name: 1,
                 email: 1
             };
-        }
-        else {
+        } else {
             sortQuery = {
                 createdAt: -1
             };
-        }
+        } 
+
         const user = new UserRepository();
+        console.log(user);
         await user.getallTrainee(query, options, sortQuery)
             .then((data) => {
                 if (data.count === 0) {
-                    throw new Error ('');
+                    throw new Error('');
                 }
-                res.status(200).send({
+                console.log(data);
+                res.send({
                     status: 'ok',
-                    message: 'Fetched successfully',
-                    Trainees: { data }
+                    message: 'Trainees fetched successfully',
+                    Trainee: { data },
+                    code: 200,
                 });
             })
             .catch((err) => {
-                res.status(404).send({
-                    message: 'Trainee Not Found',
-                    status: 404,
+                res.send({
+                    message: 'Unable to fetch Trainees',
+                    code: 404,
                     timestamp: new Date()
                 });
             });

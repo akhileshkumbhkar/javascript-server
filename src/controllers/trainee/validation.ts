@@ -1,5 +1,4 @@
 const config = {
-
     create: {
         name: {
             required: true,
@@ -9,15 +8,15 @@ const config = {
         },
         role: {
             required: true,
-            sting: true,
+            string: true,
             in: ['body'],
-            errorMessage: 'role is required',
+            errorMessage: 'Role is required'
         },
         email: {
             required: true,
-            regex: /^[a-zA-Z0-9+_.-]+@successivetech+$/,
+            regex: /^[a-zA-Z0-9+_.-]+@successive.tech+$/,
             in: ['body'],
-            errorMessage: 'email error',
+            errorMessage: 'Email error',
         },
         password: {
             required: true,
@@ -26,7 +25,6 @@ const config = {
             errorMessage: 'Password is required'
         }
     },
-
     delete: {
         id: {
             required: true,
@@ -34,11 +32,10 @@ const config = {
             in: ['params']
         }
     },
-
     get: {
         skip: {
             required: false,
-            default: 1,
+            default: 0,
             number: true,
             in: ['query'],
             errorMessage: 'Skip is invalid',
@@ -50,32 +47,20 @@ const config = {
             in: ['query'],
             errorMessage: 'Limit is invalid',
         },
-        sort: {
-            required: false,
-            boolean: true,
-            in: ['query'],
-            errorMessage: 'Sort is invalid',
-        },
-        search: {
-            required: false,
-            string: true,
-            in: ['query'],
-            errorMessage: 'Search is invalid',
-        }
+       
     },
-
     update: {
-        id: {
-            required: true,
+        id: { required: true,
             string: true,
-            in: ['body']
-        },
+            in: ['body'] },
         dataToUpdate: {
             in: ['body'],
             required: true,
             isObject: true,
+            custom: (dataToUpdate: any) => {
+                console.log();
+            },
         }
     }
 };
-
 export default config;
